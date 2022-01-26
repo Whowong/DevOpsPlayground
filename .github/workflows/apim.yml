@@ -64,8 +64,8 @@ jobs:
           repository: wdfox/DevOpsWithAPIM
           ref: whowong/DevOpsWithAPIMActions
           
-      - name: Hello world action step
-        uses: wdfox/DevOpsWithAPIM/action@whowong/DevOpsWithAPIMActions
+      - name: Azure API Management Function Import
+        uses: ./
         with:
           FunctionResourceGroup: ${{ github.event.inputs.FunctionResourceGroup }}
           FunctionName: ${{ github.event.inputs.FunctionName }}
