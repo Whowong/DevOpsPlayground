@@ -1,0 +1,76 @@
+# This is a basic workflow to help you get started with Actions
+
+name: APIM Action
+
+# Controls when the workflow will run
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      FunctionResourceGroup:
+        description: 'Resource group where the function is located'
+        required: true
+        default: 'Split'
+        type: string
+      FunctionName:
+        description: 'Name of the function we are importing'
+        default: 'SplitTestFunction'
+        required: true
+        type: string
+      DisplayName:
+        description: 'Display name of the API'
+        default: 'Test API 3'
+        required: true
+        type: string
+      APIName:
+        description: 'Name of the API'
+        default: 'test3'
+        required: true
+        type: string
+      APIUrlSuffix:
+        description: 'Suffix to append the API Management base URL'
+        default: 'john-doe'
+        required: true
+        type: string
+      APIMResourceGroup:
+        description: 'Resource group of where API Management is located'
+        default: 'lithographtestfunction'
+        required: true
+        type: string
+      APIMName:
+        description: 'Name of API Management Instance'
+        default: 'lithograph-test'
+        required: true
+        type: string
+      APIProduct:
+        description: 'Name of API Management Instance'
+        default: 'test-product'
+        required: false
+        type: string
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  Deploy_APIM_Function:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with:
+          ref: whowong/DevOpsWithAPIMActions
+          
+      - name: Hello world action step
+        uses: wdfox/DevOpsWithAPIM/action@whowong/DevOpsWithAPIMActions
+        with:
+          FunctionResourceGroup: ${{ github.event.inputs.FunctionResourceGroup }}
+          FunctionName: ${{ github.event.inputs.FunctionName }}
+          DisplayName: ${{ github.event.inputs.DisplayName }}
+          APIName: ${{ github.event.inputs.APIName }}
+          APIUrlSuffix: ${{ github.event.inputs.APIUrlSuffix }}
+          APIMResourceGroup: ${{ github.event.inputs.APIMResourceGroup }}
+          APIMName: ${{ github.event.inputs.APIMName }}
+          APIProduct: ${{ github.event.inputs.APIProduct }}
