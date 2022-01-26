@@ -30,8 +30,6 @@ on:
         type: string
       APIUrlSuffix:
         description: 'Suffix to append the API Management base URL'
-        default: 'john-doe'
-        required: true
         type: string
       APIMResourceGroup:
         description: 'Resource group of where API Management is located'
