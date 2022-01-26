@@ -18,6 +18,11 @@ on:
         default: 'john-doe'
         required: false
         type: string
+      greeting:
+        description: 'A greeting passed from the caller workflow'
+        default: 'hello'
+        required: false
+        type: string
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -32,7 +37,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, ${{ inputs.username }}!
+        run: echo ${{ inputs.greeting }}, ${{ inputs.username }}!
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
