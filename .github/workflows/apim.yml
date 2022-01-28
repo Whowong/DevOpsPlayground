@@ -63,7 +63,10 @@ jobs:
           ref: whowong/DevOpsWithAPIMActions
           
       - name: Build the package
-        run: tsc
+        run: |
+         npm install
+         tsc
+        
 
       - name: Azure API Management Function Import
         uses: ./
