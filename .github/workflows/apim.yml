@@ -62,6 +62,9 @@ jobs:
           repository: wdfox/DevOpsWithAPIM
           ref: whowong/DevOpsWithAPIMActions
           
+      - name: Build the package
+        run: tsc
+
       - name: Azure API Management Function Import
         uses: ./
         with:
