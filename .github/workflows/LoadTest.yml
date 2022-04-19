@@ -48,6 +48,8 @@ jobs:
         if: ${{ failure() }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: .github/ISSUE_TEMPLATE/LoadTest.md
           
       - uses: actions/upload-artifact@v2
         with:
