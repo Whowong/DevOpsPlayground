@@ -42,8 +42,13 @@ jobs:
               "name": "webapp",
               "value": "${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net"
               }
-            ]          
-      
+            ]  
+            
+      - uses: JasonEtco/create-an-issue@v2
+        if: ${{ failure() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - uses: actions/upload-artifact@v2
         with:
           name: loadTestResults
