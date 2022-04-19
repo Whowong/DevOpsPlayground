@@ -1,0 +1,5 @@
+version: v0.1
+testName: PersonalTest
+testPlan: WTH_Load_Test-ALD.jmx
+description: 'CI/CD Test Run'
+engineInstances: 1
