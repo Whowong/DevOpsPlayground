@@ -5,4 +5,4 @@ description: 'CI/CD Test Run'
 engineInstances: 1
 failureCriteria: 
     - avg(response_time_ms) > 3
-    - percentage(error) > 20
+      percentage(error) > 20
