@@ -4,5 +4,5 @@ testPlan: WTH_Load_Test-ALD.jmx
 description: 'CI/CD Test Run'
 engineInstances: 1
 failureCriteria:
-  - avg(response_time_ms) > 300
+  - avg(response_time_ms) > 3
   - percentage(error) > 50
