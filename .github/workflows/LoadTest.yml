@@ -8,7 +8,7 @@ on:
     
 env:
   AZURE_WEBAPP_NAME: "loadtestwth"    # set this to your application's name
-  LOAD_TEST_RESOURCE: "loadtestwth"
+  LOAD_TEST_RESOURCE: "loadtestWTH"
   LOAD_TEST_RESOURCE_GROUP: "loadtestwtheastus-rg"
 
 
