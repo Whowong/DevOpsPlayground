@@ -32,10 +32,11 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true 
+          
       - name: 'Access Key Vault Secret'
         uses: azure/CLI@v1
         with:
           azcliversion: 2.30.0
           inlineScript: |
-            az keyvault secret show --name $secretName --vault-name $keyvaultName --query value
+            $secretName = $(az keyvault secret show --name $secretName --vault-name $keyvaultName --query value --output tsv)
         
