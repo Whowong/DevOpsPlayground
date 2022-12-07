@@ -33,10 +33,13 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true 
           
+      # This will run the az cli command to get the secret and store in a value to not expose during the run.  
+      # It will then mask the value and then set it to an output variable for future consumption.    
       - name: 'Access Key Vault Secret'
         id: GetKeyVaultSecret
         run: |
           value=$(az keyvault secret show --name $secretName --vault-name $keyvaultName --query value --output tsv)
+          echo "::add-mask::$value"
           echo "SecretValue=$value" >> $GITHUB_OUTPUT
           
       - name: 'Using the secret'
