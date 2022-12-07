@@ -34,9 +34,11 @@ jobs:
           enable-AzPSSession: true 
           
       - name: 'Access Key Vault Secret'
-        uses: azure/CLI@v1
-        with:
-          azcliversion: 2.30.0
-          inlineScript: |
-            $secretName = $(az keyvault secret show --name $secretName --vault-name $keyvaultName --query value --output tsv)
-        
+        id: GetKeyVaultSecret
+        run: |
+          value=$(az keyvault secret show --name $secretName --vault-name $keyvaultName --query value --output tsv)
+          echo "SecretValue=$value" >> $GITHUB_OUTPUT
+          
+      - name: 'Using the secret'
+        run: |
+          echo "The secret is ${{ steps.GetKeyVaultSecret.outputs.SecretValue }}"
