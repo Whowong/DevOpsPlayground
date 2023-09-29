@@ -28,9 +28,9 @@ jobs:
           $response = Invoke-RestMethod -Uri $env:AZURE_CHAOS_STUDIO_API_URL -Method Post -Headers $Headers
 
           # Check the response for success
-          if ($($response.name) -eq $EXPERIMENT_ID) {
+          if ($($response.name) -eq $env:EXPERIMENT_ID) {
               Write-Output "Experiment triggered successfully"
           } else {
-              Write-Error "Failed to trigger experiment. Response: $($response.name)"
+              Write-Error "Failed to trigger experiment. Response: $($response.name), was looking for $env:EXPERIMENT_ID"
               exit 1
           }
