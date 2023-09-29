@@ -19,7 +19,7 @@ jobs:
           EXPERIMENT_ID: "ChaosStudioExperiment"  # Replace with your experiment ID
         run: |
           # Make a REST API call to trigger the experiment
-          response=$(curl -X POST -H "Content-Length: 305" -H "Authorization: $AZURE_CHAOS_STUDIO_API_KEY" -H "Content-Type: application/json" $AZURE_CHAOS_STUDIO_API_URL)
+          response=$(curl -X POST -H "Content-Length: 305" -H "Authorization: $AZURE_CHAOS_STUDIO_API_KEY" -H "Content-Type: application/json; charset=utf-8" $AZURE_CHAOS_STUDIO_API_URL)
 
           # Check the response for success
           if [[ "$response" == *"Experiment triggered successfully"* ]]; then
