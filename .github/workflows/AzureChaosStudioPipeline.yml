@@ -17,6 +17,7 @@ jobs:
           AZURE_CHAOS_STUDIO_API_URL: ${{ secrets.AZURE_CHAOS_STUDIO_API_URL }}
           AZURE_CHAOS_STUDIO_API_KEY: ${{ secrets.AZURE_CHAOS_STUDIO_API_KEY }}
           EXPERIMENT_ID: "ChaosStudioExperiment"  # Replace with your experiment ID
+        shell: pwsh
         run: |
           # Run the PowerShell script to trigger the experiment
           $Headers = @{
@@ -27,7 +28,7 @@ jobs:
           $response = Invoke-RestMethod -Uri $env:AZURE_CHAOS_STUDIO_API_URL -Method Post -Headers $Headers
 
           # Check the response for success
-          if ($response) {
+          if ($response.name -eq $EXPERIMENT_ID) {
               Write-Output "Experiment triggered successfully"
           } else {
               Write-Error "Failed to trigger experiment. Response: $response"
