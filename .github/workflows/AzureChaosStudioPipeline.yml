@@ -1,0 +1,30 @@
+name: Trigger Azure Chaos Studio Experiment
+
+on:
+  workflow_dispatch:
+    
+
+jobs:
+  trigger-chaos-experiment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger Chaos Experiment
+        env:
+          AZURE_CHAOS_STUDIO_API_URL: ${{ secrets.AZURE_CHAOS_STUDIO_API_URL }}
+          AZURE_CHAOS_STUDIO_API_KEY: ${{ secrets.AZURE_CHAOS_STUDIO_API_KEY }}
+          EXPERIMENT_ID: "ChaosStudioExperiment"  # Replace with your experiment ID
+        run: |
+          # Make a REST API call to trigger the experiment
+          response=$(curl -X POST -H "Authorization: $AZURE_CHAOS_STUDIO_API_KEY" -H "Content-Type: application/json" $AZURE_CHAOS_STUDIO_API_URL)
+
+          # Check the response for success
+          if [[ "$response" == *"Experiment triggered successfully"* ]]; then
+            echo "Experiment triggered successfully"
+          else
+            echo "Failed to trigger experiment. Response: $response"
+            exit 1
+          fi
