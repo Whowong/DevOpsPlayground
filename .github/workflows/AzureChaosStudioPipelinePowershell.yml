@@ -1,4 +1,4 @@
-name: Trigger Azure Chaos Studio Experiment
+name: Trigger Azure Chaos Studio Experiment(Powershell)
 
 on:
   workflow_dispatch:
