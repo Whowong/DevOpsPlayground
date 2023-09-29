@@ -31,6 +31,6 @@ jobs:
           if ($($response.name) -eq $EXPERIMENT_ID) {
               Write-Output "Experiment triggered successfully"
           } else {
-              Write-Error "Failed to trigger experiment. Response: $response.name"
+              Write-Error "Failed to trigger experiment. Response: $($response.name)"
               exit 1
           }
