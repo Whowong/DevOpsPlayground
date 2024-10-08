@@ -3,6 +3,9 @@ name: Create a Repository
 on:
   workflow_dispatch:  # Allows manually triggering the workflow
 
+permissions:
+  repository-projects: write
+  
 jobs:
   create_repo:
     runs-on: ubuntu-latest
