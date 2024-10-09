@@ -15,7 +15,7 @@ jobs:
       - name: Checkout Target Repo
         uses: actions/checkout@v3
         with:
-          path: source-repo
+          path: target-repo
 
       # Step 4: Checkout the target repository
       - name: Checkout Source Repo
@@ -23,7 +23,7 @@ jobs:
         with:
           repository: whowong/DevOpsPlaygroundDestination
           token: ${{ secrets.GITHUB_TOKEN }}  # Uses the auto-generated token
-          path: target-repo
+          path: source-repo
 
       # Step 5: Move the copied files to the target repository
       - name: Move Files to Target Repo
