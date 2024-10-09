@@ -35,6 +35,7 @@ jobs:
           cd target-repo
           git config --global user.name "GitHub Actions Automation"
           git config --global user.email "actions@github.com"
+          git checkout -b Codespaces_Updates
           git add .
           git commit -m "Copy files from source playground repo"
           git push
