@@ -2,6 +2,9 @@ name: Copy Files to Other Playground Repo
 
 on:
   workflow_dispatch: # Allows you to run the workflow manually
+  
+permissions:
+  contents: write  # Grants write access to the repository contents
 
 jobs:
   copy-files:
