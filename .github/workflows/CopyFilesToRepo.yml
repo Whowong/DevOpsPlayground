@@ -5,6 +5,7 @@ on:
   
 permissions:
   contents: write  # Grants write access to the repository contents
+  pull-requests: write
 
 jobs:
   copy-files:
