@@ -1,0 +1,27 @@
+name: Run After Two Approvals
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  check_approvals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Approval Count
+        id: approval_check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          APPROVALS=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
+            --jq '[.[] | select(.state=="APPROVED")] | length')
+          echo "Number of approvals: $APPROVALS"
+          if [ "$APPROVALS" -lt 1 ]; then
+            echo "Not enough approvals, exiting."
+            exit 1
+          fi
+
+      - name: Run Action After One Approval
+        if: steps.approval_check.outputs.APPROVALS == 1
+        run: |
+          echo "Two approvals received, proceeding with the action."
+          # Your action steps here
