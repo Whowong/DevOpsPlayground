@@ -29,6 +29,7 @@ jobs:
 
       - name: Run Action After One Approval
         run: |
+          ls -altr
           if [ -d ".devcontainer" ]; then
             echo ".devcontainer folder found. Deleting..."
             rm -rf .devcontainer
