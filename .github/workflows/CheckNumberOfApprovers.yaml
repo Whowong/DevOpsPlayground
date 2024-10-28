@@ -4,20 +4,13 @@ on:
     types: [submitted]
 
 jobs:
-
-  approved:
-    if: github.event.review.state == 'approved'
+  Delete-DevContainer:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This PR was approved"
-      
-  check_approvals:
-    runs-on: ubuntu-latest
-    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
       - name: Check Approval Count
-        id: approval_check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           APPROVALS=$(gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
             --jq '[.[] | select(.state=="APPROVED")] | length')
@@ -26,7 +19,7 @@ jobs:
             echo "Not enough approvals, exiting."
             exit 1
           fi
-
+    
       - name: Run Action After One Approval
         run: |
           ls -altr
