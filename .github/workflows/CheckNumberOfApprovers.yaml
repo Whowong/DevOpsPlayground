@@ -30,5 +30,14 @@ jobs:
       - name: Run Action After One Approval
         if: steps.approval_check.outputs.APPROVALS == 1
         run: |
-          echo "Two approvals received, proceeding with the action."
-          # Your action steps here
+          if [ -d ".devcontainer" ]; then
+            echo ".devcontainer folder found. Deleting..."
+            rm -rf .devcontainer
+            git config --local user.name "github-actions[bot]"
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Deleted .devcontainer folder"
+            git push
+          else
+            echo ".devcontainer folder not found. Skipping."
+          fi
