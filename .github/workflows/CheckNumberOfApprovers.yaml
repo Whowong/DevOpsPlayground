@@ -28,7 +28,6 @@ jobs:
           fi
 
       - name: Run Action After One Approval
-        if: steps.approval_check.outputs.APPROVALS == 1
         run: |
           if [ -d ".devcontainer" ]; then
             echo ".devcontainer folder found. Deleting..."
