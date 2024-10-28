@@ -7,8 +7,11 @@ jobs:
   Delete-DevContainer:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout the source branch of the pull request
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}  # Source branch of the PR
+          repository: ${{ github.event.pull_request.head.repo.full_name }} 
           
       - name: Check Approval Count
         env:
@@ -23,6 +26,8 @@ jobs:
           fi
     
       - name: Run Action After One Approval
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ls -altr
           if [ -d ".devcontainer" ]; then
@@ -32,7 +37,7 @@ jobs:
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
             git add -A
             git commit -m "Deleted .devcontainer folder"
-            git push --set-upstream origin main
+            git push "https://${GITHUB_TOKEN}@github.com/${{ github.event.pull_request.head.repo.full_name }}.git" HEAD:${{ github.event.pull_request.head.ref }}
           else
             echo ".devcontainer folder not found. Skipping."
           fi
